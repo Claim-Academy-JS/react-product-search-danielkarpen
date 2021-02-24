@@ -3,7 +3,7 @@ const SearchBar = () => (
     <label htmlFor="search" className="sr-only">
       Search
     </label>
-    <input type="search" id="search" placeholder="Search..."></input>
+    <input type="search" id="search" placeholder="Search..." />
   </div>
 );
 
