@@ -3,9 +3,16 @@ import { useEffect, useState } from "react";
 import Row from "./Row";
 
 function renderRows(products) {
-  return products.map(({ name, price }, index) => (
-    <Row name={name} price={price} key={index} />
-  ));
+  return products.map(({ name, price, category, stocked }, index, currArr) =>
+    currArr[index - 1]?.category === currArr[index].category ? (
+      <Row name={name} price={price} key={index} stocked={stocked} />
+    ) : (
+      <>
+        <Row category={category} key={index} />
+        <Row name={name} price={price} stocked={stocked} key={index} />
+      </>
+    )
+  );
 }
 
 const TBody = () => {

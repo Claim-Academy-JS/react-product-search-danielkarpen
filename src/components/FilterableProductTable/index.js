@@ -2,7 +2,7 @@ import Table from "./ProductTable";
 import Search from "./SearchBar";
 
 const FilterableProductTable = () => (
-  <main>
+  <main className="mx-auto">
     <Search />
     <Table />
   </main>

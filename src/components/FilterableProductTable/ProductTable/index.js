@@ -2,8 +2,8 @@ import TBody from "./TBody";
 
 const ProductTable = () => {
   return (
-    <table className="table-auto border-gray-500 border-2 flex justify-center ">
-      <thead>
+    <table className="mx-auto">
+      <thead className="align-left">
         <tr>
           <th>Name</th>
           <th>Price</th>

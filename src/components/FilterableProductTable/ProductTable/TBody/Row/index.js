@@ -1,19 +1,30 @@
 import PropTypes from "prop-types";
 
-const Row = ({ name, price }) => (
+const Row = ({ name, price, category, stocked }) => (
   <tr>
-    <td>{name}</td>
-    <td>{price}</td>
+    {category ? (
+      <td className="font-bold">{category}</td>
+    ) : (
+      <>
+        <td className={stocked ? "" : "text-red-500"}>{name}</td>
+        <td>{price}</td>
+      </>
+    )}
   </tr>
 );
 
 Row.defaultProps = {
-  price: "N/A",
+  name: "",
+  category: "",
+  price: "",
+  stocked: true,
 };
 
 Row.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   price: PropTypes.string,
+  category: PropTypes.string,
+  stocked: PropTypes.bool,
 };
 
 export default Row;
