@@ -17,7 +17,7 @@ const TBody = () => {
       const productData = await api.index();
       setProducts(() => productData);
     })();
-  });
+  }, []);
 
   return <tbody>{renderRows(products)}</tbody>;
 };
