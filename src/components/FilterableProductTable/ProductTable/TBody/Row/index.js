@@ -1,17 +1,19 @@
 import PropTypes from "prop-types";
 
-const Row = ({ name, price, category, stocked }) => (
-  <tr>
-    {category ? (
-      <td className="font-bold">{category}</td>
-    ) : (
-      <>
-        <td className={stocked ? "" : "text-red-500"}>{name}</td>
-        <td>{price}</td>
-      </>
-    )}
-  </tr>
-);
+const Row = ({ name, price, category, stocked }) => {
+  return (
+    <tr>
+      {category ? (
+        <td className="font-bold">{category}</td>
+      ) : (
+        <>
+          <td className={stocked ? "" : "text-red-500"}>{name}</td>
+          <td>{price}</td>
+        </>
+      )}
+    </tr>
+  );
+};
 
 Row.defaultProps = {
   name: "",

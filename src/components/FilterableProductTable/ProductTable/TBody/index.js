@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import Row from "./Row";
 
 function renderRows(products) {
-  return products.map(({ name, price, category, stocked }, index, currArr) =>
+  return products?.map(({ name, price, category, stocked }, index, currArr) =>
     currArr[index - 1]?.category === currArr[index].category ? (
       <Row name={name} price={price} key={index} stocked={stocked} />
     ) : (
