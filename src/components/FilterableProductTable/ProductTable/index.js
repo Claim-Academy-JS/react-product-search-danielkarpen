@@ -1,33 +1,22 @@
 import api from "api";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import TBody from "./TBody";
 
 const ProductTable = ({ inStockOnly, searchTerm }) => {
-  const [products, setProducts] = useState([]);
+  const fetchAllProducts = async () => {
+    const data = await api.index();
 
-  const filters = {
-    inStockOnly(item) {
-      return item.stocked;
-    },
-    searchTerm(item) {
-      return item.name.toLowerCase().includes(searchTerm.toLowerCase());
-    },
+    return data;
   };
 
-  useEffect(() => {
-    (async () => {
-      // Await results of reading stream as JSON
-      const productData = await api.index();
-      setProducts(() => productData);
-    })();
-  }, []);
+  const { isSuccess, data: products } = useQuery("products", fetchAllProducts);
 
   const filteredProducts = products
     .filter((product) => (inStockOnly ? product.stocked : true))
     .filter((product) => product.name.toLowerCase().includes(searchTerm));
 
-  return (
+  return isSuccess ? (
     <table>
       <thead>
         <tr>
@@ -37,6 +26,8 @@ const ProductTable = ({ inStockOnly, searchTerm }) => {
       </thead>
       <TBody products={filteredProducts} />
     </table>
+  ) : (
+    <p>Loading...</p>
   );
 };
 
