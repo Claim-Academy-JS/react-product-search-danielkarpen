@@ -1,15 +1,27 @@
+import api from "api";
+import { useEffect, useState } from "react";
 import TBody from "./TBody";
 
 const ProductTable = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      // Await results of reading stream as JSON
+      const productData = await api.index();
+      setProducts(() => productData);
+    })();
+  }, []);
+
   return (
-    <table className="mx-auto">
-      <thead className="align-left">
+    <table>
+      <thead>
         <tr>
-          <th>Name</th>
-          <th>Price</th>
+          <th className="text-left">Name</th>
+          <th className="text-left">Price</th>
         </tr>
       </thead>
-      <TBody />
+      <TBody products={products} />
     </table>
   );
 };
