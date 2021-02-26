@@ -6,23 +6,18 @@ const FilterableProductTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [inStockOnly, setInStockOnly] = useState(false);
 
-  function handleClick() {
-    setInStockOnly((prev) => !prev);
+  function handleKeyUp({ target: { value } }) {
+    setSearchTerm(() => value);
   }
 
-  function handleKeyup(event) {
-    setSearchTerm(() => event.target.value);
+  function handleChange() {
+    setInStockOnly((prev) => !prev);
   }
 
   return (
     <main className="container mx-auto w-1/2 flex flex-col items-center mt-8">
-      <Search
-        checkHandler={handleClick}
-        keyupHandler={handleKeyup}
-        checkValue={inStockOnly}
-        searchValue={searchTerm}
-      />
-      <Table />
+      <Search inStockHandler={handleChange} searchHandler={handleKeyUp} />
+      <Table searchTerm={searchTerm} inStockOnly={inStockOnly} />
     </main>
   );
 };
